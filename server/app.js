@@ -4,19 +4,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 const chalk = require('chalk')
 const db = require('./db')
-const config = require('./config/index.js')
+const config = require('./config/config.js')
 const router = require('./router/index.js')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const app = express()
 app.all('*', (req, res, next) => {
-  //console.log('req: ' + req.url)
-  // if(req.method == 'OPTIONS') {
-  //   res.sendStatus(200)
-  // } else {
-  //   next()
-  // }
+
   next()
 })
 

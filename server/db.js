@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const config = require('./config/index.js')
+const config = require('./config/config.js')
 const chalk = require('chalk')
 
 mongoose.connect(config.url, {userMongoClient: true})
