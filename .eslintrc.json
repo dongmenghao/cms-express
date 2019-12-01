@@ -16,6 +16,7 @@
         "ecmaVersion": 6,
         "sourceType": "module"
     },
+    "ignorePatterns": ["node_modules/"],
     "rules": {
         "indent": [
             "warn",
@@ -31,7 +32,7 @@
                 "named": "never"
             }
         ],
-        "semi": ["warn", false],
+        "semi": ["warn", "never"],
         "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }],
         "no-commonjs": ["error", { "allowPrimitiveModules": false }]
     }
