@@ -7,10 +7,6 @@ const chalk = require('chalk');
 function load(req, res, next, id) { 
   User.findByUserName(id)
     .then(user => {
-      if (user.length == 0) { 
-        console.error(chalk.red('find no user in findByUserName'));
-        return next('no user');
-      }
       req.user = user[0];
       return next();
     })

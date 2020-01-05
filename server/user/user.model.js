@@ -89,9 +89,9 @@ UserSchema.statics = {
   findByUserName(username) { 
     return this.find({ username: username })
       .exec()
-      .then((user) => { 
-        if (user) { 
-          return user;
+      .then((data) => { 
+        if (data.length > 0) { 
+          return data[0];
         }
         const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
