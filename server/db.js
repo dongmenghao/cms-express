@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
 const config = require('./config/config.js')
 const chalk = require('chalk')
 
-mongoose.connect(config.url, {userMongoClient: true})
+console.log(`dmh ${config.mongo.host}`)
+mongoose.connect(config.mongo.host, {userMongoClient: true})
 mongoose.Promise = global.Promise
 
 const db = mongoose.connection

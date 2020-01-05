@@ -9,8 +9,6 @@ const config = require('./config/config')
 Promise = require('bluebird')
 mongoose.Promise = Promise
 
-
-
 app.listen(config.port, () => {
   console.log(
     chalk.green(`server started on port: ${config.port} (${config.env})`)
