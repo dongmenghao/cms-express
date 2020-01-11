@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 const helmet = require('helmet')
 const httpStatus = require('http-status')
 const cors = require('cors')
+const expressJwt = require('express-jwt')
 const config = require('./config')
 const routers = require('../index.route')
 
@@ -27,6 +28,9 @@ app.use(helmet())
 
 // enable CORS -Cross Origin Resource Sharing
 app.use(cors())
+
+// auth protect route
+app.use(expressJwt({ secret: config.jwtSecret }).unless({ path: ['/api/auth/login'] }));
 
 // mount all routes on /api path
 app.use('/api', routers)

@@ -41,7 +41,7 @@ UserSchema
     this.hashedPassword = this.encryptPassword(password);
   })
   .get(function () {
-    return this._password;
+    return this.hashedPassword;
   });
  
 
@@ -89,13 +89,14 @@ UserSchema.statics = {
   findByUserName(username) { 
     return this.find({ username: username })
       .exec()
-      .then((data) => { 
+      .then((data) => {
         if (data.length > 0) { 
           return data[0];
         }
         const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       })
+      // TODO 请求不存在的用户 没报错，需要处理错误
   },
 
   /**

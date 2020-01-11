@@ -7,7 +7,8 @@ const chalk = require('chalk');
 function load(req, res, next, id) { 
   User.findByUserName(id)
     .then(user => {
-      req.user = user[0];
+      // console.log('get ', user, user.password);
+      req.user = user;
       return next();
     })
     .catch((err) => { next(err) });
@@ -47,10 +48,10 @@ function create(req, res, next) {
 function update(req, res, next) { 
   const user = req.user;
   user.username = req.body.username;
-  console.log(user);
-  user.save()
-    .then(savedUser => res.json(savedUser))
-    .catch(err => next(err));
+  console.log(user.password, user._password);
+  // user.save()
+  //   .then(savedUser => res.json(savedUser))
+  //   .catch(err => next(err));
 }
 
 /**
