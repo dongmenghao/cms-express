@@ -12,6 +12,10 @@ function login(req, res, next) {
   console.log('dmh login', reqUserName, reqPassword);
   User.findByUserName(reqUserName)
     .then((user) => {
+      if (user == null) { 
+        const error = new APIError('Not find user', httpStatus.NOT_FOUND, true);
+        return res.status(error.status).send(error.message);
+      }
       if (user.password === user.encryptPassword(reqPassword)) {
         console.log(chalk.green(`${user.username} login success`));
         const token = jwt.sign({ username: user.username }, config.jwtSecret, {

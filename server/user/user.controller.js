@@ -1,5 +1,7 @@
 const User = require('./user.model');
 const chalk = require('chalk');
+const APIError = require('../helpers/APIError');
+const httpStatus = require('http-status');
 
 /**
  * load user and append to req
@@ -8,10 +10,13 @@ function load(req, res, next, id) {
   User.findByUserName(id)
     .then(user => {
       // console.log('get ', user, user.password);
+      if (user === null) { 
+        const error = new APIError('Not find user', httpStatus.NOT_FOUND, true);
+        return res.status(error.status).send(error.message);;
+      }
       req.user = user;
       return next();
     })
-    .catch((err) => { next(err) });
 }
 
 /**

@@ -93,10 +93,8 @@ UserSchema.statics = {
         if (data.length > 0) { 
           return data[0];
         }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
-        return Promise.reject(err);
+        return null;
       })
-      // TODO 请求不存在的用户 没报错，需要处理错误
   },
 
   /**
