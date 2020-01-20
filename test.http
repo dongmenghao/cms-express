@@ -1,0 +1,36 @@
+@url = http://localhost:8000/api
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTE5ZjMwYmU0NDZmOTk1MTgxNTFlYWIiLCJpYXQiOjE1Nzk1MDk4MTAsImV4cCI6MTU3OTU5NjIxMH0.Hm8QKBd-35Kg1erffq-o4HRRObD2leNhEwBqP7LqiEk
+
+POST  {{url}}/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=test1&password=password
+###
+
+GET {{url}}/users
+Authorization: {{token}}
+
+###
+GET {{url}}/users HTTP/1.1
+Authorization: {{token}}
+
+###
+GET {{url}}/article
+Authorization: {{token}}
+
+###
+GET {{url}}/article/5e251610d7aa2fe119e75ddb
+Authorization: {{token}} 
+
+###
+DELETE {{url}}/article/5e256fb6223675f2dfdd9b66
+Authorization: {{token}}
+
+####
+POST {{url}}/article
+Authorization: {{token}}
+Content-Type: application/x-www-form-urlencoded
+
+title=title1&content=content1&category=栏目三
+
+
