@@ -54,9 +54,9 @@ function update(req, res, next) {
   const user = req.user;
   user.username = req.body.username;
   console.log(user.password, user._password);
-  // user.save()
-  //   .then(savedUser => res.json(savedUser))
-  //   .catch(err => next(err));
+  user.save()
+    .then(savedUser => res.json(savedUser))
+    .catch(err => next(err));
 }
 
 /**

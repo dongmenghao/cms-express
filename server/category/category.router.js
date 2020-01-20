@@ -10,6 +10,7 @@ router.route('/')
   /** Post /api/categpry create category */
   .post(categoryCtrl.createCategory);
 
+
 router.route('/:id')
   /** Get /api/category/:id  - Get category */
   .get(categoryCtrl.findCategoryById)
