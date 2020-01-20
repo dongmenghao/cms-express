@@ -28,13 +28,17 @@ function create(req, res, next) {
   if (!req.body.category) { 
     next(new APIError('category is null', httpStatus.NOT_FOUND));
   }
+  const user = User.findById(req.user.userId)
+    .catch((err) => { new APIError(`user is not exist`, httpStatus.NOT_FOUND) });
+  
   Category.findOne({ name: req.body.category })
     .then(category => {
-      console.log(category);
+      console.log('artilce create ',category, user);
       const article = new Article({
         title: req.body.title,
         content: req.body.content,
-        category: category._id
+        category: category._id,
+        author: req.user.userId
       })
     
       article.save()
@@ -72,7 +76,7 @@ function list(req, res, list) {
 function remove (req, res, next) { 
   const article = req.article;
   article.remove()
-    .then(deletedArticle => res.json(deletedArticle))
+    .then(deletedArticle => res.status(204).send(httpStatus[204]))
     .catch((err) => next(err));
 }
 

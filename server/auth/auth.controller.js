@@ -18,7 +18,7 @@ function login(req, res, next) {
       }
       if (user.password === user.encryptPassword(reqPassword)) {
         console.log(chalk.green(`${user.username} login success`));
-        const token = jwt.sign({ username: user.username }, config.jwtSecret, {
+        const token = jwt.sign({ userId: user._id }, config.jwtSecret, {
           expiresIn: 60 * 60 * 24  // 单位为 s 秒
         });
         return res.json({

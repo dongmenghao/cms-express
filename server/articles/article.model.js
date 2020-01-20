@@ -10,7 +10,7 @@ const ArticleSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: false
+    required: true
   },
   title: {
     type: String,
@@ -45,15 +45,19 @@ ArticleSchema.statics = {
         path: 'category',
         select: 'name -_id'
       })
-      .exec()
-      .then(article => {
-        if (article) {
-          console.log(`article get ${article.category}`);
-          return article;
-        }
-        const err = new APIError('No such article exists!', httpStatus.NOT_FOUND);
-        return Promise.reject(err);
-      });
+      .populate({
+        path: 'author',
+        select: 'username'
+      })
+      .exec();
+      // .then(article => {
+      //   if (article) {
+      //     console.log(`article get ${article.category}`);
+      //     return article;
+      //   }
+      //   const err = new APIError('No such article exists!', httpStatus.NOT_FOUND);
+      //   return Promise.reject(err);
+      // });
   },
 
   /**
@@ -65,6 +69,7 @@ ArticleSchema.statics = {
   list({ skip = 0, limit = 10 } = {}) { 
     return this.find()
       .populate('category', 'name -_id')
+      .populate('author', 'username -_id')
       .sort({ createAt: -1 })
       .skip(+skip)
       .limit(+limit)
