@@ -1,5 +1,5 @@
 @url = http://localhost:8000/api
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTE5ZjMwYmU0NDZmOTk1MTgxNTFlYWIiLCJpYXQiOjE1Nzk1MDk4MTAsImV4cCI6MTU3OTU5NjIxMH0.Hm8QKBd-35Kg1erffq-o4HRRObD2leNhEwBqP7LqiEk
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTE5ZjMwYmU0NDZmOTk1MTgxNTFlYWIiLCJpYXQiOjE1ODAzMDI0OTQsImV4cCI6MTU4MDM4ODg5NH0.orzWPfoizTvsLOk7V7y2qz6N6GpXw0k4Axnj-o6xdtI
 
 POST  {{url}}/auth/login
 Content-Type: application/x-www-form-urlencoded
@@ -11,7 +11,7 @@ GET {{url}}/users
 Authorization: {{token}}
 
 ###
-GET {{url}}/users HTTP/1.1
+GET {{url}}/users/5e19f30be446f99518151eab HTTP/1.1
 Authorization: {{token}}
 
 ###
@@ -31,6 +31,6 @@ POST {{url}}/article
 Authorization: {{token}}
 Content-Type: application/x-www-form-urlencoded
 
-title=title1&content=content1&category=栏目三
+title=title5&content=content5&category=栏目三
 
 

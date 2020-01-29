@@ -7,7 +7,7 @@ const httpStatus = require('http-status');
  * load user and append to req
  */
 function load(req, res, next, id) { 
-  User.findByUserName(id)
+  User.findById(id)
     .then(user => {
       // console.log('get ', user, user.password);
       if (user === null) { 

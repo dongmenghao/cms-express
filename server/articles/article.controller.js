@@ -28,9 +28,8 @@ function create(req, res, next) {
   if (!req.body.category) { 
     next(new APIError('category is null', httpStatus.NOT_FOUND));
   }
-  const user = User.findById(req.user.userId)
-    .catch((err) => { new APIError(`user is not exist`, httpStatus.NOT_FOUND) });
   
+  const user = req.user;
   Category.findOne({ name: req.body.category })
     .then(category => {
       console.log('artilce create ',category, user);
@@ -43,7 +42,7 @@ function create(req, res, next) {
     
       article.save()
         .then(article => {
-          res.json(article)
+          return res.json(article);
         })
         .catch((err) => next(err));
     })
