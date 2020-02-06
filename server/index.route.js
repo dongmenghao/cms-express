@@ -12,8 +12,8 @@ router.get('/health-check', (req, res) =>
 )
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
-router.use('/category', categoryRoutes);
-router.use('/article', articleRoutes);
+router.use('/categories', categoryRoutes);
+router.use('/articles', articleRoutes);
 
 
 module.exports = router

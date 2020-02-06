@@ -1,12 +1,12 @@
 @url = http://localhost:8000/api
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTE5ZjMwYmU0NDZmOTk1MTgxNTFlYWIiLCJpYXQiOjE1ODAzMDI0OTQsImV4cCI6MTU4MDM4ODg5NH0.orzWPfoizTvsLOk7V7y2qz6N6GpXw0k4Axnj-o6xdtI
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTE5ZjMwYmU0NDZmOTk1MTgxNTFlYWIiLCJpYXQiOjE1ODA5OTA5NDEsImV4cCI6MTU4MTA3NzM0MX0.wB41g_DQ9zREUtcL8jO_d1uTSXZwIlB0KEjm-9jk344
 
 POST  {{url}}/auth/login
 Content-Type: application/x-www-form-urlencoded
 
 username=test1&password=password
-###
 
+### 用户
 GET {{url}}/users
 Authorization: {{token}}
 
@@ -14,20 +14,35 @@ Authorization: {{token}}
 GET {{url}}/users/5e19f30be446f99518151eab HTTP/1.1
 Authorization: {{token}}
 
-###
-GET {{url}}/article
+### 获取分类
+GET {{url}}/categories/5e33ef5179e8d636d51aa976
+Authorization: {{token}}
+
+### 创建分类
+POST {{url}}/categories
+Authorization: {{token}}
+Content-Type: application/x-www-form-urlencoded
+
+name=column1&parent=5e135ac359b29b7c66f9b113
+
+### 删除分类
+DELETE {{url}}/categories/5e33ec72a3835435cfc5d729
 Authorization: {{token}}
 
 ###
-GET {{url}}/article/5e251610d7aa2fe119e75ddb
+GET {{url}}/articles
+Authorization: {{token}}
+
+###
+GET {{url}}/articles/5e251610d7aa2fe119e75ddb
 Authorization: {{token}} 
 
 ###
-DELETE {{url}}/article/5e256fb6223675f2dfdd9b66
+DELETE {{url}}/articles/5e256fb6223675f2dfdd9b66
 Authorization: {{token}}
 
 ####
-POST {{url}}/article
+POST {{url}}/articles
 Authorization: {{token}}
 Content-Type: application/x-www-form-urlencoded
 

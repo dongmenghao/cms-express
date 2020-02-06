@@ -4,18 +4,19 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 function createCategory(req, res, next) { 
-  const categoryName = req.body.name;
-  console.log('create category:' + categoryName);
-  if (!categoryName) { 
+  const model = req.body;
+  
+  if (!model.name) { 
     const err = new APIError('name is null', httpStatus["422_NAME"]);
     return Promise.reject(err);
   }
-  Category.findOneAsync({ name: categoryName })
+  Category.findOneAsync({ name: model.name })
     .then(function (category) {
       if (category)
-        return Promise.reject(new APIError(`name ${categoryName} is alreay exist.`, httpStatus["403_MESSAGE"]));
+        return Promise.reject(new APIError(`name ${model.name} is alreay exist.`, httpStatus["403_MESSAGE"]));
       else {
-        const category = new Category({ name: categoryName });
+        const category = new Category(model);
+        console.log('create category:' + model.name);
         category.save()
           .then(savedCategory => res.json(savedCategory))
           .catch((err) => next(err));
@@ -27,11 +28,11 @@ function createCategory(req, res, next) {
 function getCategoryList(req, res, next) {
   const name = req.query.name;
   if (name) {
-    Category.find({ name: name })
+    Category.find({ name: name }).populate('parent')
       .then(result => res.json(result))
       .catch(err => next(err));
   } else { 
-    Category.find()
+    Category.find().populate('parent')
     .exec()
     .then(data => res.json(data));
   }

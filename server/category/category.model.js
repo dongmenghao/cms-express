@@ -10,6 +10,10 @@ const CategorySchema = new mongoose.Schema({
     unique: true,
   },
   description: String,
+  parent: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Category'
+  },
   isShow: {
     type: Boolean,
     default: true,
