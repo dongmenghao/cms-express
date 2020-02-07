@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
-import router from 'vue-router' // no-eslint-off
+import router from './router' // no-eslint-off
 
 const http = axios.create({
   baseURL: process.env.VUE_APP_API_URL || '/api',
@@ -23,8 +23,7 @@ http.interceptors.response.use(res => {
       type: 'error',
       message: err
     })
-    
-    //router.push('/login');
+    router.push('/login');
 })
 
 export default http;
