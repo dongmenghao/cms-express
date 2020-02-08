@@ -6,6 +6,7 @@ import Main from '../views/Main.vue'
 import CategoryEdit from '../views/CategoryEdit.vue'
 import CategoryList from '../views/CategoryList.vue'
 import UserList from '../views/UserList.vue'
+import UserEdit from '../views/UserEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,9 @@ const routes = [
       { path: '/categories/create', component: CategoryEdit },
       { path: '/categories/edit/:id', component: CategoryEdit, props: true },
       { path: '/categories/list', component: CategoryList },
-      { path: '/users/list', component: UserList }
+      { path: '/users/list', component: UserList },
+      { path: '/users/edit/:id', component: UserEdit, props: true },
+      { path: '/users/create', component: UserEdit }
     ]
   },
   {

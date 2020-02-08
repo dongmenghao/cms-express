@@ -4,7 +4,7 @@
 POST  {{url}}/auth/login
 Content-Type: application/x-www-form-urlencoded
 
-username=test1&password=password
+username=test3&password=password3
 
 ### 用户
 GET {{url}}/users
