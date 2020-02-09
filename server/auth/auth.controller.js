@@ -22,12 +22,13 @@ function login(req, res, next) {
           expiresIn: 60 * 60 * 24  // 单位为 s 秒
         });
         return res.json({
+          auth: true,
           token,
           username: user.username
         });
       }
-      else { 
-        return res.json('密码错误');
+      else {
+        return res.status(200).send({auth: false, message: '密码错误'});
       }
     })
 }

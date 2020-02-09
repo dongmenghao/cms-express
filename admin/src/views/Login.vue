@@ -30,12 +30,19 @@ export default {
    async login() {
     const res = await this.$http.post('/auth/login', this.model);
     console.log('dmh ', res);
-    localStorage.token = res.data.token;
-    this.$router.push('/');
-    this.$message({
-      type: 'success',
-      message: '登录成功'
-    });
+    if (res.data.auth) {
+      localStorage.token = res.data.token;
+      this.$router.push('/');
+      this.$message({
+        type: 'success',
+        message: '登录成功'
+      });
+    } else {
+      this.$message({
+        type: 'error',
+        message: res.data.message
+      })
+    }
    }
   }
 }
