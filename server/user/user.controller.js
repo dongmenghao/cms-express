@@ -53,7 +53,7 @@ function create(req, res, next) {
 function update(req, res, next) { 
   const user = req.user;
   user.username = req.body.username;
-  console.log(user.password, user._password);
+  user.password = req.body.password;
   user.save()
     .then(savedUser => res.json(savedUser))
     .catch(err => next(err));
