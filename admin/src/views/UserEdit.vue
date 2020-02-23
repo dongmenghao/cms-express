@@ -11,6 +11,17 @@
       <el-form-item label="确认密码" prop="checkPass">
         <el-input type="password" v-model="model.checkPass"></el-input>
       </el-form-item>
+      <el-form-item label="头像上传" prop="avatar">
+        <el-upload
+          class="avatar-uploader"
+          :action="uploadUrl"
+          :headers="getAuthHeaders()"
+          :show-file-list="false"
+          :on-success="afterUpload">
+          <img v-if="model.avatar" :src="model.avatar" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('model')">保存</el-button>
       </el-form-item>
@@ -78,13 +89,46 @@ export default {
       });
       
     },
+    afterUpload(res, file) {
+      this.$set(this.model, 'avatar', res.url)
+      console.log(res);
+    },
     async fetch() {
       const res = await this.$http.get(`/users/${this.id}`);
       this.model = res.data;
     }
   },
+
   created() {
     this.id && this.fetch();
+    console.log(this.$http.defaults.baseURL)
   },
 }
 </script>
+
+<style>
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+
+</style>

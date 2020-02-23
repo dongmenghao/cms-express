@@ -9,6 +9,7 @@ const cors = require('cors')
 const expressJwt = require('express-jwt')
 const config = require('./config')
 const routers = require('../index.route')
+const multer = require('multer')
 
 const app = express()
 if (config.env === 'development') { 
@@ -29,11 +30,25 @@ app.use(helmet())
 // enable CORS -Cross Origin Resource Sharing
 app.use(cors())
 
+// static upload
+app.use('/uploads', express.static(__dirname + '/../uploads'))
+
 // auth protect route
-app.use(expressJwt({ secret: config.jwtSecret }).unless({ path: ['/api/auth/login'] }));
+app.use(expressJwt({ secret: config.jwtSecret }).unless({ path: [ '/api/auth/login'] }));
 
 // mount all routes on /api path
 app.use('/api', routers)
+
+
+// upload file
+const upload = multer({
+  dest: __dirname + "/../uploads"
+})
+app.post('/api/uploads', upload.single('file'), async (req, res) => { 
+  const file = req.file
+  file.url = `http://localhost:8000/uploads/${file.filename}` 
+  res.send(file)
+})
 
 
 // error handler, send stacktrace only during development
