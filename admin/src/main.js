@@ -9,6 +9,11 @@ import http from './http'
 Vue.prototype.$http = http;
 
 Vue.mixin({
+  data() {
+    return {
+      user: {}
+    }
+  },
   computed: {
     uploadUrl() { 
       return this.$http.defaults.baseURL + '/uploads'

@@ -32,6 +32,8 @@ export default {
     console.log('dmh ', res);
     if (res.data.auth) {
       localStorage.token = res.data.token;
+      localStorage.username = res.data.username;
+      localStorage.avatar = res.data.avatar;
       this.$router.push('/');
       this.$message({
         type: 'success',

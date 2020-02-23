@@ -24,7 +24,8 @@ function login(req, res, next) {
         return res.json({
           auth: true,
           token,
-          username: user.username
+          username: user.username,
+          avatar: user.avatar,
         });
       }
       else {
